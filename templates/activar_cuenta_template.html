@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Activar Cuenta</title>
+</head>
+<body>
+    <h1>Activar Cuenta</h1>
+    <form action="/activar_cuenta_post" method="POST">
+        <label for="email">Correo:</label>
+        <input type="email" name="email" id="email" value="{{ email }}" readonly>
+        <br>
+        <label for="codigo">Código de Activación:</label>
+        <input type="text" name="codigo" id="codigo" required>
+        <br>
+        <button type="submit">Activar Cuenta</button>
+    </form>
+</body>
+</html>
