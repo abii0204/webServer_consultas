@@ -216,12 +216,6 @@ def activar_cuenta_post():
         if 'cursor' in locals():
             cursor.close()
 
-
-
-
-
-
-
 if __name__ == '__main__':
     conexion, tunel = get_db_connection()
     context = ssl.SSLContext(ssl.PROTOCOL_TLS_SERVER)
