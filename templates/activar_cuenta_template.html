@@ -7,8 +7,8 @@
 <body>
     <h1>Activar Cuenta</h1>
     <form action="/activar_cuenta_post" method="POST">
-        <label for="email">Correo:</label>
-        <input type="email" name="email" id="email" value="{{ email }}" readonly>
+        <label for="login">Usuario o Correo:</label>
+        <input type="text" name="login" id="login" required>
         <br>
         <label for="codigo">Código de Activación:</label>
         <input type="text" name="codigo" id="codigo" required>
@@ -17,3 +17,4 @@
     </form>
 </body>
 </html>
+
