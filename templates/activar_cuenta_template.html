@@ -2,18 +2,98 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Activar Cuenta</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f7fc;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .container {
+            background-color: #ffffff;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            padding: 40px;
+            width: 400px;
+            text-align: center;
+        }
+
+        h1 {
+            font-size: 24px;
+            color: #0066cc;
+            margin-bottom: 20px;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        label {
+            font-size: 16px;
+            color: #333333;
+            text-align: left;
+        }
+
+        input[type="text"] {
+            padding: 12px;
+            font-size: 16px;
+            border: 2px solid #e0e0e0;
+            border-radius: 6px;
+            outline: none;
+            transition: border-color 0.3s;
+        }
+
+        input[type="text"]:focus {
+            border-color: #0066cc;
+        }
+
+        button {
+            background-color: #0066cc;
+            color: white;
+            padding: 14px;
+            font-size: 16px;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        button:hover {
+            background-color: #005bb5;
+        }
+
+        .footer {
+            font-size: 14px;
+            margin-top: 20px;
+            color: #666666;
+        }
+
+    </style>
 </head>
 <body>
-    <h1>Activar Cuenta</h1>
-    <form action="/activar_cuenta_post" method="POST">
-        <label for="email">Correo:</label>
-        <input type="email" name="email" id="email" value="{{ email }}" readonly>
-        <br>
-        <label for="codigo">Código de Activación:</label>
-        <input type="text" name="codigo" id="codigo" required>
-        <br>
-        <button type="submit">Activar Cuenta</button>
-    </form>
+    <div class="container">
+        <h1>Activar Cuenta</h1>
+        <form action="/activar_cuenta_post" method="POST">
+            <label for="login">Correo o Nombre de Usuario:</label>
+            <input type="text" name="login" id="login" required>
+            <br>
+            <label for="codigo">Código de Activación:</label>
+            <input type="text" name="codigo" id="codigo" required>
+            <br>
+            <button type="submit">Activar Cuenta</button>
+        </form>
+        <div class="footer">
+            <p>¿Tienes problemas? <a href="/contactar">Contáctanos</a></p>
+        </div>
+    </div>
 </body>
 </html>

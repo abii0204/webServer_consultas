@@ -1,41 +1,119 @@
-<!DOCTYPE html> <!-- Declara el tipo de documento HTML5 -->
-<html lang="es"> <!-- Define el idioma de la página como español -->
+<!DOCTYPE html>
+<html lang="es">
 <head>
-    <meta charset="UTF-8"> <!-- Define la codificación de caracteres como UTF-8 -->
-    <title>registro</title> <!-- Título que aparecerá en la pestaña del navegador -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registro</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f7fc;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .container {
+            background-color: #ffffff;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            padding: 40px;
+            width: 450px;
+            text-align: center;
+        }
+
+        h2 {
+            font-size: 26px;
+            color: #0066cc;
+            margin-bottom: 20px;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        label {
+            font-size: 16px;
+            color: #333333;
+            text-align: left;
+        }
+
+        input[type="text"], input[type="password"] {
+            padding: 12px;
+            font-size: 16px;
+            border: 2px solid #e0e0e0;
+            border-radius: 6px;
+            outline: none;
+            transition: border-color 0.3s;
+        }
+
+        input[type="text"]:focus, input[type="password"]:focus {
+            border-color: #0066cc;
+        }
+
+        button {
+            background-color: #0066cc;
+            color: white;
+            padding: 14px;
+            font-size: 16px;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        button:hover {
+            background-color: #005bb5;
+        }
+
+        .footer {
+            font-size: 14px;
+            margin-top: 20px;
+            color: #666666;
+        }
+
+        .footer a {
+            color: #0066cc;
+            text-decoration: none;
+        }
+
+        .footer a:hover {
+            text-decoration: underline;
+        }
+    </style>
 </head>
 <body>
-<!-- Formulario que enviará los datos al servidor usando el método POST -->
-<form action="/registrarse_in" method="POST">
-    <!-- Campo para ingresar el correo o nombre de usuario -->
-     <label for="nombre">Nombre:</label>
-    <input type="text" id="nombre" name="nombre" required> <!-- Campo de texto, requerido -->
-    <br> <!-- Salto de línea -->
+    <div class="container">
+        <h2>Registro</h2>
+        <form action="/registrarse_in" method="POST">
+            <label for="nombre">Nombre:</label>
+            <input type="text" id="nombre" name="nombre" required>
 
-     <label for="apellidos">Apellidos:</label>
-    <input type="text" id="apellidos" name="apellidos" required> <!-- Campo de texto, requerido -->
-    <br> <!-- Salto de línea -->
+            <label for="apellidos">Apellidos:</label>
+            <input type="text" id="apellidos" name="apellidos" required>
 
-     <label for="email">Correo:</label>
-    <input type="text" id="email" name="correo" required> <!-- Campo de texto, requerido -->
-    <br> <!-- Salto de línea -->
+            <label for="email">Correo:</label>
+            <input type="text" id="email" name="correo" required>
 
-    <!-- Campo para ingresar la contraseña -->
-    <label for="contrasena">Contraseña:</label>
-    <input type="password" id="contrasena" name="contrasena" required> <!-- Campo de contraseña, requerido -->
-    <br> <!-- Salto de línea -->
+            <label for="contrasena">Contraseña:</label>
+            <input type="password" id="contrasena" name="contrasena" required>
 
-     <label for="telefono">Teléfono:</label>
-    <input type="text" id="telefono" name="telefono" required> <!-- Campo de texto, requerido -->
-    <br> <!-- Salto de línea -->
+            <label for="telefono">Teléfono:</label>
+            <input type="text" id="telefono" name="telefono" required>
 
-     <label for="direccion">Dirección:</label>
-    <input type="text" id="direccion" name="direccion" required> <!-- Campo de texto, requerido -->
-    <br> <!-- Salto de línea -->
+            <label for="direccion">Dirección:</label>
+            <input type="text" id="direccion" name="direccion" required>
 
-    <!-- Botón para enviar el formulario -->
-    <button type="submit">Aceptar</button>
-
-</form>
+            <button type="submit">Aceptar</button>
+        </form>
+        <div class="footer">
+            <p>¿Ya tienes cuenta? <a href="/sign_in">Inicia sesión aquí</a></p>
+        </div>
+    </div>
 </body>
 </html>

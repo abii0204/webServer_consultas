@@ -1,28 +1,110 @@
-<!DOCTYPE html> <!-- Declara el tipo de documento HTML5 -->
-<html lang="es"> <!-- Define el idioma de la página como español -->
+<!DOCTYPE html>
+<html lang="es">
 <head>
     <meta charset="UTF-8"> <!-- Define la codificación de caracteres como UTF-8 -->
-    <title>Login</title> <!-- Título que aparecerá en la pestaña del navegador -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- Asegura que la página se vea bien en dispositivos móviles -->
+    <title>Login</title> <!-- Título de la página -->
+    <style>
+        /* Estilos generales para el cuerpo de la página */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f7fc; /* Fondo suave */
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        /* Contenedor del formulario */
+        .container {
+            background-color: #ffffff; /* Fondo blanco */
+            border-radius: 8px; /* Bordes redondeados */
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Sombra suave */
+            padding: 40px;
+            width: 400px; /* Ancho fijo */
+            text-align: center;
+        }
+
+        h2 {
+            color: #0066cc; /* Color de título azul */
+            margin-bottom: 20px;
+            font-size: 24px;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        label {
+            font-size: 16px;
+            color: #333333;
+            text-align: left;
+        }
+
+        input[type="text"], input[type="password"] {
+            padding: 12px;
+            font-size: 16px;
+            border: 2px solid #e0e0e0;
+            border-radius: 6px;
+            outline: none;
+            transition: border-color 0.3s;
+        }
+
+        input[type="text"]:focus, input[type="password"]:focus {
+            border-color: #0066cc;
+        }
+
+        button {
+            background-color: #0066cc;
+            color: white;
+            padding: 14px;
+            font-size: 16px;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        button:hover {
+            background-color: #005bb5;
+        }
+
+        .footer {
+            font-size: 14px;
+            margin-top: 20px;
+            color: #666666;
+        }
+
+        .footer a {
+            color: #0066cc;
+            text-decoration: none;
+        }
+
+        .footer a:hover {
+            text-decoration: underline;
+        }
+    </style>
 </head>
 <body>
-<!-- Formulario que enviará los datos al servidor usando el método POST -->
-<form action="/sign_in" method="POST">
-    <!-- Campo para ingresar el correo o nombre de usuario -->
-    <label for="email">Correo / Usuario:</label>
-    <input type="text" id="email" name="login" required> <!-- Campo de texto, requerido -->
-    <br> <!-- Salto de línea -->
+    <div class="container">
+        <h2>Iniciar sesión</h2>
+        <form action="/sign_in" method="POST">
+            <label for="email">Correo / Usuario:</label>
+            <input type="text" id="email" name="login" required>
 
-    <!-- Campo para ingresar la contraseña -->
-    <label for="password">Contraseña:</label>
-    <input type="password" id="password" name="passwd" required> <!-- Campo de contraseña, requerido -->
-    <br> <!-- Salto de línea -->
+            <label for="password">Contraseña:</label>
+            <input type="password" id="password" name="passwd" required>
 
-    <!-- Botón para enviar el formulario -->
-    <button type="submit">Aceptar</button>
+            <button type="submit">Aceptar</button>
+        </form>
 
-</form>
-<a href="/registro">
-    <button type="submit">Registrarse</button>
-</a>
+        <div class="footer">
+            <p>¿No tienes cuenta? <a href="/registro">Regístrate aquí</a></p>
+        </div>
+    </div>
 </body>
 </html>

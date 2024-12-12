@@ -1,4 +1,3 @@
-from dotenv import load_dotenv
 import os
 import jwt
 from flask import Flask, render_template, request, make_response, redirect, jsonify
@@ -10,6 +9,7 @@ app = Flask(__name__)
 conexion = None
 tunnel = None
 
+conexion, tunel = get_db_connection()
 @app.route('/read_qr')
 def read_qr():
     return render_template('read_qr.html')
@@ -87,6 +87,7 @@ def sign_in():
         result = cursor.fetchone()
 
         if result is None:
+            # Si no se encuentran resultados (error interno)
             return render_template('login_incorrecto_template.html')
 
         cuenta_activa, login_exitoso = result[0], result[1]
@@ -106,15 +107,15 @@ def sign_in():
             # Credenciales incorrectas
             return render_template('login_incorrecto_template.html')
 
+        # Confirmar los cambios realizados por el procedimiento almacenado
+        conexion.commit()  # Aquí aseguramos que los cambios se persistan
+
     except Exception as e:
         print(f"Error al procesar el login: {e}")
         return 'Error al procesar el login.'
 
     finally:
         cursor.close()
-
-
-
 
 @app.route('/registrarse_in', methods=['POST'])
 def registrarse_in():
@@ -182,12 +183,12 @@ def activar_cuenta():
 
 @app.route('/activar_cuenta_post', methods=['POST'])
 def activar_cuenta_post():
-    email = request.form.get('email', '').strip()
-    codigo = request.form.get('codigo', '')
+    login = request.form.get('login', '').strip()  # Puede ser correo o nombre
+    codigo = request.form.get('codigo', '').strip()
 
     try:
-        if not email or not codigo:
-            return render_template('cuenta_no_activada.html', error="Email o código no proporcionados.")
+        if not login or not codigo:
+            return render_template('cuenta_no_activada.html', error="Usuario o código no proporcionados.")
 
         try:
             codigo = int(codigo)
@@ -195,16 +196,16 @@ def activar_cuenta_post():
             return render_template('cuenta_no_activada.html', error="El código debe ser un número válido.")
 
         cursor = conexion.cursor()
-        cursor.callproc('activar_cuenta', (email, codigo))
+        cursor.callproc('activar_cuenta', (login, codigo))
         result = cursor.fetchone()
         conexion.commit()
 
         if result and result[0]:
             # Si el código es correcto, mostrar la plantilla de cuenta activada y redirigir al login
-            return render_template('cuenta_activada.html', email=email)
+            return render_template('cuenta_activada.html', login=login)
         else:
             # Si el código es incorrecto, mostrar la plantilla de cuenta no activada
-            return render_template('cuenta_no_activada.html', email=email, error="El código de activación es incorrecto.")
+            return render_template('cuenta_no_activada.html', login=login, error="El código de activación es incorrecto.")
 
     except Exception as e:
         print(f"Error al activar la cuenta: {e}")
@@ -215,17 +216,10 @@ def activar_cuenta_post():
             cursor.close()
 
 
-
-
-
-
-
 if __name__ == '__main__':
-    conexion, tunel = get_db_connection()
-    app.run()
 
-
-
+    app.run(host='0.0.0.0', port=5001, debug=True)
 
     #app.run(host='0.0.0.0', debug=True)
-  #  app.run(host='0.0.0.0', port=5000, debug=True)
+    #app.run(host='0.0.0.0', port=5000, debug=True)
+
