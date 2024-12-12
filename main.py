@@ -196,15 +196,22 @@ def activar_cuenta_post():
             return render_template('cuenta_no_activada.html', error="El código debe ser un número válido.")
 
         cursor = conexion.cursor()
+
+        # Verificar los datos que se envían
+        print(f"Enviando a la base de datos -> Login: {login}, Código: {codigo}")
+
+        # Llamar al procedimiento almacenado
         cursor.callproc('activar_cuenta', (login, codigo))
         result = cursor.fetchone()
-        conexion.commit()
+        conexion.commit()  # Confirmar cambios
+
+        print(f"Resultado de la función almacenada: {result}")
 
         if result and result[0]:
-            # Si el código es correcto, mostrar la plantilla de cuenta activada y redirigir al login
+            # Código correcto
             return render_template('cuenta_activada.html', login=login)
         else:
-            # Si el código es incorrecto, mostrar la plantilla de cuenta no activada
+            # Código incorrecto
             return render_template('cuenta_no_activada.html', login=login, error="El código de activación es incorrecto.")
 
     except Exception as e:
@@ -214,6 +221,7 @@ def activar_cuenta_post():
     finally:
         if 'cursor' in locals():
             cursor.close()
+
 
 
 if __name__ == '__main__':
